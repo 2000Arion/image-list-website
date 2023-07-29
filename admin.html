@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord CDN Test | arion2000.xyz</title>
+    <link rel="icon" type="image/x-icon"
+        href="https://lh3.googleusercontent.com/DRA2M-dAoOp06TK-y9kec0XlQQIMDCHmR7YsQEpQE8DdukbfDpo9PVgP15j6no1_jKDDTiWlzsdjX4k2G5VGSsU=w16383">
+    <style>
+        .field {
+            background-color: #5865F2;
+            padding: 0.1%;
+            border-color: #2B2D31;
+            border-radius: 10px;
+            margin: 1% auto;
+            transition: 270ms;
+            text-align: center;
+            max-width: 80%;
+            box-shadow: 11px 11px 18px -9px rgba(0, 0, 0, 0.55);
+            -webkit-box-shadow: 11px 11px 18px -9px rgba(0, 0, 0, 0.55);
+            -moz-box-shadow: 11px 11px 18px -9px rgba(0, 0, 0, 0.55);
+        }
+
+        h1 {
+            margin: 0.75% auto;
+        }
+
+        .link {
+            padding-top: 1.2%;
+            padding-bottom: 1.2%;
+        }
+
+        body {
+            background-color: #2B2D31;
+            color: white;
+            font-family: sans-serif;
+            max-width: 100%;
+            margin: 0 auto;
+            /* Zentriert den Inhalt innerhalb des sichtbaren Bereichs */
+        }
+
+        #feedback {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin-top: 90vh;
+            margin-bottom: 0;
+            background-color: #5865F2;
+            padding: 0.7%;
+            cursor: default;
+        }
+
+        .help_btn {
+            cursor: default;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin-top: 0;
+            background-color: #5865F2;
+            padding: 0.5%;
+            border-color: #2B2D31;
+            margin: 0.3%;
+            transition: 270ms;
+        }
+
+        .globalcontentview {
+            margin-bottom: 10vh;
+        }
+
+        .button {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .button1 {
+            background-color: #0a4a00;
+            color: white;
+            /*border: 2px solid #4CAF50;*/
+        }
+
+        .button2 {
+            background-color: #4a0000;
+            color: white;
+        }
+
+        .button1:hover {
+            background-color: #4CAF50;
+            color: white;
+            /*border: 2px solid #4CAF50;*/
+        }
+
+        .button2:hover {
+            background-color: #cf3d1d;
+            color: white;
+        }
+
+        input {
+            width: 72%;
+            height: 25px;
+            font-size: 18px;
+        }
+    </style>
+    <script>
+        function scrollToBottom() {
+            // Die Höhe der gesamten Seite (einschließlich des sichtbaren Bereichs) erhalten
+            const gesamtHoehe = document.body.scrollHeight;
+
+            // Die Höhe des sichtbaren Bereichs im Browserfenster erhalten
+            const sichtbareHoehe = window.innerHeight;
+
+            // Die vertikale Scroll-Position auf den Wert des Abstands zwischen dem oberen Bildschirmrand und dem unteren Ende setzen
+            window.scrollTo(0, gesamtHoehe - sichtbareHoehe - -100);
+        }
+
+        function load() {
+            if (window.location.hostname == 'img.localhost' && window.location.pathname == '/index.html') {
+                window.location.replace = 'http://img.localhost/';
+            } else if (window.location.hostname != 'img.localhost') {
+                window.location.href = 'http://img.localhost/';
+            }
+        }
+
+        function copy(srcId) {
+            document.getElementById('feedback').innerHTML = '⚠️ Lade...'
+            /*if (window.location.hostname == 'img.localhost' && window.location.pathname == '/index.html') {
+                window.location.replace = 'http://img.localhost/';
+            } else if (window.location.hostname != 'img.localhost') {
+                window.location.href = 'http://img.localhost/';
+            }*/
+            // Den Inhalt des src-Attributs des Bildes abrufen
+            const imgId = document.getElementById(srcId);
+            navigator.clipboard.writeText(imgId.src);
+            document.getElementById('feedback').innerHTML = '✅ Der Link <a target="_blank" href="' + imgId.src + '">(' + imgId.src + ')</a> wurde kopiert. <br>➡️ Du kannst ihn überall über <b><u>STRG + V</u></b> oder über das <b><u>Rechtsklick-Menü</u></b> einfügen.'
+        }
+
+        function sendLink() {
+            const linkInput = document.getElementById('linkInput').value;
+            const errors = document.getElementById('errors');
+
+            if (
+                (linkInput.startsWith('https://media.discordapp.net/attachments/') ||
+                    linkInput.startsWith('https://cdn.discordapp.com/attachments/')) &&
+                (linkInput.includes('.png') || linkInput.includes('.jpg') || linkInput.includes('.jpeg'))
+            ) {
+                if (linkInput.includes(',') || linkInput.includes('"') || linkInput.includes("'") || linkInput.includes('[') || linkInput.includes(']') || linkInput.includes('(') || linkInput.includes(')') || linkInput.includes('{') || linkInput.includes('}') || linkInput.includes("\\")) {
+                    errors.textContent = 'Ungültiger Link! Bitte beachte die Anforderungen: Der Link muss als einer der Discord-CDN-Links identifizierbar sein und das Bild, zu dem der Link führt, muss eines der unterstützten Bilddateiformate (PNG, JPG, JPEG) beinhalten.';
+                } else {
+                    // Hier kannst du den Code einfügen, um den Link an das Node.js-Backend zu senden.
+                    // Du kannst beispielsweise fetch verwenden, um eine POST-Anfrage zu senden.
+
+                    // Beispiel für eine POST-Anfrage mit fetch:
+                    fetch('/send-link', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ link: linkInput }),
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            // Daten verarbeitet - z. B. Erfolg oder Fehlermeldung anzeigen
+                            if (data.success) {
+                                errors.textContent = 'Bild wurde erfolgreich hinzugefügt!';
+                                window.location.href = './#response_type=ad_end_req'
+                            } else {
+                                errors.textContent = 'Fehler beim Senden des Links an den Server. Bitte überprüfe den Log.';
+                            }
+                        })
+                        .catch((error) => {
+                            errors.textContent = 'Ein Fehler ist aufgetreten. Möglicher Weise ist der Link zu diesem Bild schon vorhanden. Bitte überprüfe den Log.';
+                            console.error('Fehler beim Senden des Links an den Server:', error);
+                        });
+                }
+            } else {
+                errors.textContent = 'Ungültiger Link! Bitte beachte die Anforderungen: Der Link muss als einer der Discord-CDN-Links identifizierbar sein und das Bild, zu dem der Link führt, muss eines der unterstützten Bilddateiformate (PNG, JPG, JPEG) beinhalten.';
+            }
+        }
+
+        function deleteSendLink() {
+            const deleteLinkInput = document.getElementById('deleteLinkInput').value;
+            const deleteErrors = document.getElementById('deleteErrors');
+
+            // Überprüfe, ob der Link den Anforderungen entspricht
+            if (
+                (deleteLinkInput.startsWith('https://media.discordapp.net/attachments/') ||
+                    deleteLinkInput.startsWith('https://cdn.discordapp.com/attachments/')) &&
+                (deleteLinkInput.includes('.png') || deleteLinkInput.includes('.jpg') || deleteLinkInput.includes('.jpeg'))
+            ) {
+                // Sende die Anfrage an das Node.js-Backend
+                fetch('/delete-link', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ link: deleteLinkInput }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.success) {
+                            deleteErrors.textContent = 'Bild wurde erfolgreich entfernt.';
+                        } else {
+                            deleteErrors.textContent = 'Link zum Bild wurde nicht auf dem Server gefunden oder ein anderer Fehler ist aufgetreten. Bitte überprüfe den Log.';
+                        }
+                    })
+                    .catch((error) => {
+                        deleteErrors.textContent = 'Ein Fehler ist aufgetreten. Möglicher Weise wurde der Link nicht gefunden. Bitte überprüfe den Log.';
+                        console.error('Fehler beim Senden der Anfrage:', error);
+                    });
+            } else {
+                deleteErrors.textContent = 'Ungültiger Link! Bitte überprüfe den Log und die config.json Datei.';
+            }
+        }
+    </script>
+</head>
+
+<body link="#99f0e6" vlink="#99f0e6" alink="#ffffff">
+    <nav>
+        <h2 class="help_btn">🖼️ Discord CDN Test&nbsp;|&nbsp;Admin</h2>
+    </nav>
+    <div class="globalcontentview">
+        <div class="field">
+            <h1>Bild hinzufügen</h1>
+        </div>
+        <div class="field link">
+            <h2 style="display: inline;">Link eingeben: </h2><input style="display: inline;" type="text" id="linkInput">
+        </div>
+        <div class="field">
+            <button class="button button1" onclick="sendLink()">✅ Senden</button>
+            <p id="errors"></p>
+        </div>
+        <div class="field">
+            <h1>Bild entfernen</h1>
+        </div>
+        <div class="field link">
+            <h2 style="display: inline;">Link eingeben: </h2><input style="display: inline;" type="text"
+                id="deleteLinkInput">
+        </div>
+        <div class="field">
+            <button class="button button2" onclick="deleteSendLink()">❌ Senden</button>
+            <p id="deleteErrors"></p>
+        </div>
+    </div>
+    <h3 id="feedback">👋 Willkommen im Admin-Interface! Hier kannst du Links hinzufügen und entfernen. Für Massenaktionen, schaue in die config.json Datei.<br><a href="./"
+            style="text-decoration: none;">⬅️ Admin-Interface verlassen</a></h3>
+</body>
+
+</html>

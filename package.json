@@ -1,0 +1,15 @@
+{
+  "name": "link-list-website",
+  "version": "1.0.0",
+  "description": "Alle Bilder auf der Webseite sind auf dem CDN von Discord gehostet. Irgendwann werden diese Bilder vorraussichtlich gelöscht werden. Mit dieser Webseite soll getestet werden, wann das der Fall ist.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "Arion2000",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "port": 3000,
+  "admin_panel_enabled": [
+    true
+  ],
+  "__comment": "WICHTIG FÜR admin_panel_enabled - ZUM DEAKTIVIEREN FELD LEEREN! / ZUM AKTIVIEREN ETWAS EINTRAGEN!",
+  "links": [
+    ""
+  ]
+}
