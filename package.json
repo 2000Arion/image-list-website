@@ -10,6 +10,6 @@
   "author": "Arion2000",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^3.1.3"
+    "nodemon": "^3.1.4"
   }
 }
